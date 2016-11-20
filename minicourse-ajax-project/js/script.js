@@ -62,15 +62,15 @@ function loadData() {
     $nyurl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + $city + '&sort=newest&api-key=3a62af964c584fb58daa1f6694d85312'
 
     $.getJSON($nyurl, function( data ) {
-    $nytHeaderElem.text('New York Times Articles About' + $city);
+    $nytHeaderElem.text('New York Times Articles About ' + $city);
 
     // sets the params for the articles function
     $articles = data.response.docs;
     // sets the containers for each li element for a for loop, that generates incremental lis
     for (var i = 0; i < $articles.length; i++) {
         var $article = $articles[i];
-        //appends the articles each li
-        $nytElem.append('<li class="article">'+'a href="'+$article.web_url+'">'+$article.headline.main+'</a>'+'<p>'+ $article.snippet +'</p>'+'</li>');
+        //appends the articles each li, styling seems to be a little off
+        $nytElem.append('<li class="article">'+'<a href="'+$article.web_url+'">'+$article.headline.main+'</a>'+'<p>'+ $article.snippet +'</p>'+'</li>');
     };
 });
     return false;
