@@ -59,10 +59,9 @@ function loadData() {
 
     // custom .get JSON request
     // from the nyt API generator
-    var $url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
-        $url += '?' + $.param({'api-key': "3a62af964c584fb58daa1f6694d85312"});
+    $nyurl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + $city + '&sort=newest&api-key=3a62af964c584fb58daa1f6694d85312';
 
-    $.getJSON( $url, function( data ) {
+    $.getJSON( $nyurl, function( data ) {
       var items = [];
       $.each( data, function( key, val ) {
         items.push( "<li id='" + key + "'>" + val + "</li>" );
