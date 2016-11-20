@@ -37,11 +37,42 @@ function loadData() {
     // YOUR CODE GOES HERE!
     $body.append('<img class="bgimg" src="'+ $streetURL +'">');
 
-    // NYT AJAX JSON request, more information / documentation here : https://classroom.udacity.com/courses/ud110/lessons/3310298553/concepts/31806586030923
+    /* NYT AJAX JSON request, more information / documentation here : https://classroom.udacity.com/courses/ud110/lessons/3310298553/concepts/31806586030923
 
     $.getJSON(URL, function (data){
         console.log(data);
-    });
+    }); */
+
+    /* original .getJSON request for lists from: http://api.jquery.com/jquery.getjson/
+
+    $.getJSON( "ajax/test.json", function( data ) {
+      var items = [];
+      $.each( data, function( key, val ) {
+        items.push( "<li id='" + key + "'>" + val + "</li>" );
+      });
+     
+      $( "<ul/>", {
+        "class": "my-new-list",
+        html: items.join( "" )
+      }).appendTo( "body" );
+    });    */
+
+    // custom .get JSON request
+    // from the nyt API generator
+    var $url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
+        $url += '?' + $.param({'api-key': "3a62af964c584fb58daa1f6694d85312"});
+
+    $.getJSON( $url, function( data ) {
+      var items = [];
+      $.each( data, function( key, val ) {
+        items.push( "<li id='" + key + "'>" + val + "</li>" );
+      });
+     
+      $( "<ul/>", {
+        "id": "nytimes-articles",
+        html: items.join( "" )
+      }).appendTo( "body" );
+    });    
 
     return false;
 };
