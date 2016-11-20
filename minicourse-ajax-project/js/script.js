@@ -37,6 +37,12 @@ function loadData() {
     // YOUR CODE GOES HERE!
     $body.append('<img class="bgimg" src="'+ $streetURL +'">');
 
+    // NYT AJAX JSON request, more information / documentation here : https://classroom.udacity.com/courses/ud110/lessons/3310298553/concepts/31806586030923
+
+    $.getJSON(URL, function (data){
+        console.log(data);
+    });
+
     return false;
 };
 
