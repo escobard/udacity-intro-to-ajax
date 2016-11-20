@@ -90,17 +90,20 @@ function loadData() {
     // this defines the requests' URL
      url: $wikiURL,
     // sets the datatype for this request
-     dataType: jsonp,
+     dataType: "jsonp",
      success: function (response) {
-        $wikiArticles = [1];
+        var $wikiArticles = response[1];
 
         for (var i = 0; i < $wikiArticles.length; i++) {
             var $wikiArticle = $wikiArticles[i];
-            $wikiElem.append('<li class="wiki-article">'+'<a href="'+$wikiArticle.web_url+'">'+$wikiArticle.headline.main+'</a>'+'<p>'+$wikiArticle.snippet + '</p>'+'</li>');
+            // the following does not work for wikipedia, gotta remember that each of these requests is different, and accepts different parameters.
+            // Also, familirizing myseif with the instructors html on this app would have allowed me to find the answer on my own
+            // $wikiElem.append('<li class="wiki-article">'+'<a href="'+$wikiArticle.web_url+'">'+$wikiArticle.headline.main+'</a>'+'<p>'+$wikiArticle.snippet + '</p>'+'</li>');
+            // from instructor notes
+            var $wikiajaxurl = 'http://en.wikipedia.org/wiki/'+ $wikiArticle;
+            $wikiElem.append('<li><a href='+$wikiajaxurl+'">'+$wikiArticle+'</a></li>');   
         }
      }
-    }).done(function() {
-    $( this ).addClass( "done" );
     });
 
     return false;
