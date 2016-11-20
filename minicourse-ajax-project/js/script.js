@@ -23,7 +23,7 @@ function loadData() {
     var $city = $('#city').val();
 
     // join the street and city variables together
-    var $address = $street + ',' + $city;
+    var $address = $street + ', ' + $city;
 
     // sets the greeting
     
@@ -59,22 +59,21 @@ function loadData() {
 
     // custom .get JSON request
     // from the nyt API generator
-    $nyurl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + $city + '&sort=newest&api-key=3a62af964c584fb58daa1f6694d85312';
+    $nyurl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + $city + '&sort=newest&api-key=3a62af964c584fb58daa1f6694d85312'
 
-    $.getJSON( $nyurl, function( data ) {
-      var items = [];
-      $.each( data, function( key, val ) {
-        items.push( "<li id='" + key + "'>" + val + "</li>" );
-      });
-     
-      $( "<ul/>", {
-        "id": "nytimes-articles",
-        html: items.join( "" )
-      }).appendTo( "body" );
-    });    
+    $.getJSON($nyurl, function( data ) {
+    $nytHeaderElem.text('New York Times Articles About' + $city);
 
+    // sets the params for the articles function
+    $articles = data.response.docs;
+    // sets the containers for each li element for a for loop, that generates incremental lis
+    for (var i = 0; i < $articles.length; i++) {
+        var $article = $articles[i];
+        //appends the articles each li
+        $nytElem.append('<li class="article">'+'a href="'+$article.web_url+'">'+$article.headline.main+'</a>'+'<p>'+ $article.snippet +'</p>'+'</li>');
+    };
+});
     return false;
 };
-
 // try to use this for the login programming needed on the first project
 $('#form-container').submit(loadData);
