@@ -82,6 +82,27 @@ function loadData() {
 }).fail(function (){
         $nytHeaderElem.text('New York Times Articles were not found');;
     });;
+    
+    // start my own ajax request for wikipedia
+    // udacity needs to post the URL they expect for this app to work on their course
+    $wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + $city + '&format=json&callback=wikiCallback';
+    $.ajax({
+    // this defines the requests' URL
+     url: $wikiURL,
+    // sets the datatype for this request
+     dataType: jsonp,
+     success: function (response) {
+        $wikiArticles = [1];
+
+        for (var i = 0; i < $wikiArticles.length; i++) {
+            var $wikiArticle = $wikiArticles[i];
+            $wikiElem.append('<li class="wiki-article">'+'<a href="'+$wikiArticle.web_url+'">'+$wikiArticle.headline.main+'</a>'+'<p>'+$wikiArticle.snippet + '</p>'+'</li>');
+        }
+     }
+    }).done(function() {
+    $( this ).addClass( "done" );
+    });
+
     return false;
 };
 // try to use this for the login programming needed on the first project
