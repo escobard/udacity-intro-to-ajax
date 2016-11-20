@@ -13,25 +13,27 @@ function loadData() {
     var $nytElem = $('#nytimes-articles');
     var $greeting = $('#greeting');
 
-    var $street = $('#street')
+        // clear out old data before new request
+    $wikiElem.text("");
+    $nytElem.text("");
+
+    var $street = $('#street').val();
     // this sets the VALUE of the #street id input as the $street variable. VERY useful for login form
-    .val();
-    var $city = $('#city').val;
+    
+    var $city = $('#city').val();
 
     // join the street and city variables together
-    var $address = $street + '+' + $city;
+    var $address = $street + ',' + $city;
 
     // sets the greeting
     
     $greeting.text('So you want to live at ' + $address + '?');
 
-    // clear out old data before new request
-    $wikiElem.text("");
-    $nytElem.text("");
+
 
     // load streetview
 
-    $streetURL = 'http://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + $address + '?';
+    $streetURL = 'http://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + $address + '';
     // YOUR CODE GOES HERE!
     $body.append('<img class="bgimg" src="'+ $streetURL +'">');
 
