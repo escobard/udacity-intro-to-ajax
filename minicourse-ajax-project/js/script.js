@@ -64,9 +64,6 @@ function loadData() {
 
     $.getJSON($nyurl, function( data ) {
     $nytHeaderElem.text('New York Times Articles About ' + $city);
-    this.fail(function (){
-        console.log('REQUEST FAILED!');
-    });
     // sets the params for the articles function
     $articles = 
     // this is the data received from the ajax call
@@ -82,7 +79,9 @@ function loadData() {
         //each of the $article. appends are ELEMENTS of the .docs array within the .response object. these can be viewed in the network tab for each obj
         $nytElem.append('<li class="article">'+'<a href="'+$article.web_url+'">'+$article.headline.main+'</a>'+'<p>'+ $article.snippet +'</p>'+'</li>');
     };
-});
+}).fail(function (){
+        $nytHeaderElem.text('New York Times Articles were not found');;
+    });;
     return false;
 };
 // try to use this for the login programming needed on the first project
