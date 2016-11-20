@@ -64,7 +64,9 @@ function loadData() {
 
     $.getJSON($nyurl, function( data ) {
     $nytHeaderElem.text('New York Times Articles About ' + $city);
-
+    this.fail(function (){
+        console.log('REQUEST FAILED!');
+    });
     // sets the params for the articles function
     $articles = 
     // this is the data received from the ajax call
