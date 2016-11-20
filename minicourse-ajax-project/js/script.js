@@ -58,18 +58,26 @@ function loadData() {
     });    */
 
     // custom .get JSON request
-    // from the nyt API generator
+    // Paste this URL into your browser, to view the raw JSON data.
+    // This can be used to return your AJAX request and its parameters, prior to actually running the request
     $nyurl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + $city + '&sort=newest&api-key=3a62af964c584fb58daa1f6694d85312'
 
     $.getJSON($nyurl, function( data ) {
     $nytHeaderElem.text('New York Times Articles About ' + $city);
 
     // sets the params for the articles function
-    $articles = data.response.docs;
+    $articles = 
+    // this is the data received from the ajax call
+    data
+    // this is the response data received via the ajax call, call from jquery language more here : https://api.jquery.com/jquery.get/
+    .response
+    // this defines the DOCUMENTS within the response. you can view this via the network tab, where the docs are listed per request
+    .docs;
     // sets the containers for each li element for a for loop, that generates incremental lis
     for (var i = 0; i < $articles.length; i++) {
         var $article = $articles[i];
         //appends the articles each li, styling seems to be a little off
+        //each of the $article. appends are ELEMENTS of the .docs array within the .response object. these can be viewed in the network tab for each obj
         $nytElem.append('<li class="article">'+'<a href="'+$article.web_url+'">'+$article.headline.main+'</a>'+'<p>'+ $article.snippet +'</p>'+'</li>');
     };
 });
