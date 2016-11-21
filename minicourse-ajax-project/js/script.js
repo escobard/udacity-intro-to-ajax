@@ -85,7 +85,7 @@ function loadData() {
     
     // start my own ajax request for wikipedia
     // udacity needs to post the URL they expect for this app to work on their course
-    $wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + $city + '&format=json&callback=wikiCallback';
+    $wikiURL = 'http://en.wikipedsadfsia.org/w/api.php?action=opensearch&search=' + $city + '&format=json&callback=wikiCallback';
 
     // added timeout function when wiki resources fail to load due to no error handling on jsonp ajax calls
     $wikiFail = setTimeout(function(){
